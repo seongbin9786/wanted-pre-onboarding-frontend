@@ -58,6 +58,35 @@ async function createTodo(
   return response.json();
 }
 
+// TODO: 반환된 accessToken을 저장, 중복된 코드 컴포넌트화
+async function updateTodo(
+  accessToken: string,
+  toUpdate: TodoListItemData
+): Promise<TodoListItemData> {
+  const response = await fetch(
+    `https://pre-onboarding-selection-task.shop/todos/${toUpdate.id}`,
+    {
+      method: "put",
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        todo: toUpdate.todo,
+        isCompleted: toUpdate.isCompleted,
+      }),
+    }
+  );
+  console.log(response);
+  if (!response.ok) {
+    const body = (await response.json()) as BackendErrorResponse;
+    alert(body.message);
+    throw new Error("Backend Error!");
+  }
+  // TODO: any인데 Typing하기
+  return response.json();
+}
+
 interface TodoListPageProps {
   loggedIn: boolean;
   accessToken: string;
@@ -70,13 +99,14 @@ export function TodoListPage({ loggedIn, accessToken }: TodoListPageProps) {
   const [loaded, setLoaded] = useState(false);
   const [todos, setTodos] = useState<TodoListItemData[]>([]);
   const [createInput, setCreateInput] = useState("");
-  const handleCheckChange = (id: number) => () => {
+  const handleCheckChange = (id: number) => async () => {
     // 이렇게 처리해도 될까? 모르겠네
     const toChange = todos.find((todo) => todo.id === id);
     if (!toChange) {
       return;
     }
     toChange.isCompleted = !toChange.isCompleted;
+    await updateTodo(accessToken, toChange);
     setTodos([...todos]);
   };
   const addNewTodo = (newItem: TodoListItemData) => {
