@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { BackendErrorResponse } from "../server";
 
 interface SignupFormData {
@@ -34,6 +35,7 @@ interface SignInPageProps {
 }
 
 export function SignInPage({ setAccessToken }: SignInPageProps) {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailIsValid, setEmailIsvalid] = useState(false);
@@ -110,6 +112,8 @@ export function SignInPage({ setAccessToken }: SignInPageProps) {
           onClick={async () => {
             const accessToken = await fetchSignIn({ email, password });
             setAccessToken(accessToken);
+            navigate("/todo");
+            localStorage.setItem("accessToken", accessToken);
           }}
         >
           로그인
