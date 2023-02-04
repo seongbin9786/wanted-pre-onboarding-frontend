@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { BackendErrorResponse } from "../server";
 
 interface SignupFormData {
@@ -34,8 +35,24 @@ interface SignUpPageProps {
 }
 
 export function SignUpPage({ setAccessToken }: SignUpPageProps) {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [emailIsValid, setEmailIsvalid] = useState(false);
+  const [passwordlIsValid, setPasswordlIsvalid] = useState(false);
+  const submitAvailable = emailIsValid && passwordlIsValid;
+
+  const updateEmail = (newEmail: string) => {
+    // email 검사
+    setEmailIsvalid(newEmail.includes("@"));
+    setEmail(newEmail);
+  };
+
+  const updatePassword = (newPassword: string) => {
+    setPasswordlIsvalid(newPassword.length >= 8);
+    setPassword(newPassword);
+  };
+
   return (
     <div>
       <h1>회원가입 폼</h1>
@@ -64,7 +81,7 @@ export function SignUpPage({ setAccessToken }: SignUpPageProps) {
             data-testid="signup-email-input"
             type="email"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => updateEmail(e.target.value)}
             style={{ height: 24, padding: "4px 8px", fontSize: 16 }}
           />
         </div>
@@ -83,7 +100,7 @@ export function SignUpPage({ setAccessToken }: SignUpPageProps) {
             data-testid="signup-password-input"
             type="password"
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(e) => updatePassword(e.target.value)}
             style={{ height: 24, padding: "4px 8px", fontSize: 16 }}
           />
         </div>
@@ -91,9 +108,11 @@ export function SignUpPage({ setAccessToken }: SignUpPageProps) {
           style={{ height: 48, marginTop: 4 }}
           id="signup-button"
           data-testid="signup-button"
+          disabled={!submitAvailable}
           onClick={async () => {
             const accessToken = await fetchSignUp({ email, password });
             setAccessToken(accessToken);
+            navigate("/signin");
           }}
         >
           회원가입

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { BackendErrorResponse } from "../server";
 
 interface SignupFormData {
@@ -34,8 +35,24 @@ interface SignInPageProps {
 }
 
 export function SignInPage({ setAccessToken }: SignInPageProps) {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [emailIsValid, setEmailIsvalid] = useState(false);
+  const [passwordlIsValid, setPasswordlIsvalid] = useState(false);
+  const submitAvailable = emailIsValid && passwordlIsValid;
+
+  const updateEmail = (newEmail: string) => {
+    // email 검사
+    setEmailIsvalid(newEmail.includes("@"));
+    setEmail(newEmail);
+  };
+
+  const updatePassword = (newPassword: string) => {
+    setPasswordlIsvalid(newPassword.length >= 8);
+    setPassword(newPassword);
+  };
+
   return (
     <div>
       <h1>로그인 폼</h1>
@@ -64,7 +81,7 @@ export function SignInPage({ setAccessToken }: SignInPageProps) {
             data-testid="signin-email-input"
             type="email"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => updateEmail(e.target.value)}
             style={{ height: 24, padding: "4px 8px", fontSize: 16 }}
           />
         </div>
@@ -83,7 +100,7 @@ export function SignInPage({ setAccessToken }: SignInPageProps) {
             data-testid="signin-password-input"
             type="password"
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(e) => updatePassword(e.target.value)}
             style={{ height: 24, padding: "4px 8px", fontSize: 16 }}
           />
         </div>
@@ -91,9 +108,12 @@ export function SignInPage({ setAccessToken }: SignInPageProps) {
           style={{ height: 48, marginTop: 4 }}
           id="signin-button"
           data-testid="signin-button"
+          disabled={!submitAvailable}
           onClick={async () => {
             const accessToken = await fetchSignIn({ email, password });
             setAccessToken(accessToken);
+            navigate("/todo");
+            localStorage.setItem("accessToken", accessToken);
           }}
         >
           로그인
