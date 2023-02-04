@@ -87,6 +87,26 @@ async function updateTodo(
   return response.json();
 }
 
+// TODO: 반환된 accessToken을 저장, 중복된 코드 컴포넌트화
+async function deleteTodo(accessToken: string, id: number): Promise<void> {
+  const response = await fetch(
+    `https://pre-onboarding-selection-task.shop/todos/${id}`,
+    {
+      method: "delete",
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "Content-Type": "application/json",
+      },
+    }
+  );
+  console.log(response);
+  if (!response.ok) {
+    const body = (await response.json()) as BackendErrorResponse;
+    alert(body.message);
+    throw new Error("Backend Error!");
+  }
+}
+
 interface TodoListPageProps {
   loggedIn: boolean;
   accessToken: string;
@@ -111,6 +131,20 @@ export function TodoListPage({ loggedIn, accessToken }: TodoListPageProps) {
   };
   const addNewTodo = (newItem: TodoListItemData) => {
     setTodos([...todos, newItem]);
+  };
+  const handleSubmit = (id: number) => async (name: string) => {
+    // 이렇게 처리해도 될까? 모르겠네
+    const toChange = todos.find((todo) => todo.id === id);
+    if (!toChange) {
+      return;
+    }
+    toChange.todo = name;
+    await updateTodo(accessToken, toChange);
+    setTodos([...todos]);
+  };
+  const handleDelete = (id: number) => async () => {
+    await deleteTodo(accessToken, id);
+    setTodos(todos.filter((todo) => todo.id !== id));
   };
 
   // 최초 로딩
@@ -149,13 +183,15 @@ export function TodoListPage({ loggedIn, accessToken }: TodoListPageProps) {
           <h1>list is empty...</h1>
         </div>
       ) : (
-        <ol>
+        <ol style={{ display: "flex", flexDirection: "column", gap: 8 }}>
           {todos.map((todo) => (
             <li key={todo.id}>
               <TodoListItem
                 name={todo.todo}
                 checked={todo.isCompleted}
                 handleCheck={handleCheckChange(todo.id)}
+                handleSubmit={handleSubmit(todo.id)}
+                handleDelete={handleDelete(todo.id)}
               />
             </li>
           ))}
