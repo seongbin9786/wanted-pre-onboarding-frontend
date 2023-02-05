@@ -1,40 +1,12 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { BackendErrorResponse } from "../server";
-
-interface SignupFormData {
-  email: string;
-  password: string;
-}
-
-// TODO: 반환된 accessToken을 저장, 중복된 코드 컴포넌트화
-async function fetchSignUp(signupFormData: SignupFormData) {
-  const response = await fetch(
-    "https://pre-onboarding-selection-task.shop/auth/signup",
-    {
-      body: JSON.stringify(signupFormData),
-      method: "post",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }
-  );
-  console.log(response);
-  if (!response.ok) {
-    const body = (await response.json()) as BackendErrorResponse;
-    alert(body.message);
-    return "";
-  }
-  const responseBody = await response.json();
-  console.log(responseBody);
-  return responseBody.access_token;
-}
+import { AuthApi } from "../apis/AuthApi";
 
 interface SignUpPageProps {
-  setAccessToken: (accessToken: string) => void;
+  authApi: AuthApi;
 }
 
-export function SignUpPage({ setAccessToken }: SignUpPageProps) {
+export function SignUpPage({ authApi }: SignUpPageProps) {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -110,8 +82,7 @@ export function SignUpPage({ setAccessToken }: SignUpPageProps) {
           data-testid="signup-button"
           disabled={!submitAvailable}
           onClick={async () => {
-            const accessToken = await fetchSignUp({ email, password });
-            setAccessToken(accessToken);
+            await authApi.signUpApi({ email, password });
             navigate("/signin");
           }}
         >

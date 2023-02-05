@@ -1,8 +1,12 @@
 import { useEffect, useState } from "react";
 import { BrowserRouter, Link, Outlet, Route, Routes } from "react-router-dom";
+import { AuthApi } from "../apis/AuthApi";
 import { SignInPage } from "./SignInpage";
 import { SignUpPage } from "./SignUpPage";
 import { TodoListPage } from "./TodoListPage";
+
+// 한 번 생성하면 끝이어서 컴포넌트 바깥에서 생성
+const authApi = new AuthApi("https://pre-onboarding-selection-task.shop");
 
 export const RootRouter = () => {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -56,12 +60,14 @@ export const RootRouter = () => {
           />
           <Route
             path="signin"
-            element={<SignInPage setAccessToken={updateAccessToken} />}
+            element={
+              <SignInPage
+                authApi={authApi}
+                setAccessToken={updateAccessToken}
+              />
+            }
           />
-          <Route
-            path="signup"
-            element={<SignUpPage setAccessToken={updateAccessToken} />}
-          />
+          <Route path="signup" element={<SignUpPage authApi={authApi} />} />
           <Route
             path="todo"
             element={
