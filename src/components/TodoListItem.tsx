@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState } from 'react';
 
 interface TodoListItemProps {
   name: string;
@@ -23,8 +23,8 @@ export function TodoListItem({
   };
 
   return (
-    <div style={{ display: "flex", gap: 16, height: 48, alignItems: "center" }}>
-      <label style={{ width: 240, display: "flex", gap: 4 }}>
+    <div style={{ display: 'flex', gap: 16, height: 48, alignItems: 'center' }}>
+      <label style={{ width: 240, display: 'flex', gap: 4 }}>
         <input
           type="checkbox"
           name="checked"

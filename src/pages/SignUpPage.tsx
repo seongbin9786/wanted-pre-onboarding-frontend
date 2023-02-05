@@ -1,6 +1,6 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { AuthApi } from "../apis/AuthApi";
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { AuthApi } from '../apis/AuthApi';
 
 interface SignUpPageProps {
   authApi: AuthApi;
@@ -8,15 +8,15 @@ interface SignUpPageProps {
 
 export function SignUpPage({ authApi }: SignUpPageProps) {
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [emailIsValid, setEmailIsvalid] = useState(false);
   const [passwordlIsValid, setPasswordlIsvalid] = useState(false);
   const submitAvailable = emailIsValid && passwordlIsValid;
 
   const updateEmail = (newEmail: string) => {
     // email 검사
-    setEmailIsvalid(newEmail.includes("@"));
+    setEmailIsvalid(newEmail.includes('@'));
     setEmail(newEmail);
   };
 
@@ -30,22 +30,22 @@ export function SignUpPage({ authApi }: SignUpPageProps) {
       <h1>회원가입 폼</h1>
       <div
         style={{
-          display: "flex",
-          flexDirection: "column",
+          display: 'flex',
+          flexDirection: 'column',
           maxWidth: 300,
           gap: 16,
-          padding: "32px 16px",
-          backgroundColor: "darkgray",
+          padding: '32px 16px',
+          backgroundColor: 'darkgray',
         }}
       >
         <div
           style={{
-            display: "flex",
-            flexDirection: "column",
+            display: 'flex',
+            flexDirection: 'column',
             gap: 4,
           }}
         >
-          <label htmlFor="signup-email-input" style={{ display: "block" }}>
+          <label htmlFor="signup-email-input" style={{ display: 'block' }}>
             이메일
           </label>
           <input
@@ -54,17 +54,17 @@ export function SignUpPage({ authApi }: SignUpPageProps) {
             type="email"
             value={email}
             onChange={(e) => updateEmail(e.target.value)}
-            style={{ height: 24, padding: "4px 8px", fontSize: 16 }}
+            style={{ height: 24, padding: '4px 8px', fontSize: 16 }}
           />
         </div>
         <div
           style={{
-            display: "flex",
-            flexDirection: "column",
+            display: 'flex',
+            flexDirection: 'column',
             gap: 4,
           }}
         >
-          <label htmlFor="signup-password-input" style={{ display: "block" }}>
+          <label htmlFor="signup-password-input" style={{ display: 'block' }}>
             비밀번호
           </label>
           <input
@@ -73,7 +73,7 @@ export function SignUpPage({ authApi }: SignUpPageProps) {
             type="password"
             value={password}
             onChange={(e) => updatePassword(e.target.value)}
-            style={{ height: 24, padding: "4px 8px", fontSize: 16 }}
+            style={{ height: 24, padding: '4px 8px', fontSize: 16 }}
           />
         </div>
         <button
@@ -83,7 +83,7 @@ export function SignUpPage({ authApi }: SignUpPageProps) {
           disabled={!submitAvailable}
           onClick={async () => {
             await authApi.signUpApi({ email, password });
-            navigate("/signin");
+            navigate('/signin');
           }}
         >
           회원가입

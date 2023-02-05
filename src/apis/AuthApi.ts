@@ -1,4 +1,4 @@
-import { AbstractApi } from "./AbstractApi";
+import { AbstractApi } from './AbstractApi';
 
 export interface SignupFormData {
   email: string;
@@ -16,14 +16,14 @@ interface SignInApiResponse {
 
 export class AuthApi extends AbstractApi {
   async signInApi(form: SigninFormData) {
-    const url = "/auth/signin";
-    const response = await this.request<SignInApiResponse>("post", url, form);
+    const url = '/auth/signin';
+    const response = await this.request<SignInApiResponse>('post', url, form);
     console.log(response.access_token);
     return response.access_token;
   }
 
   async signUpApi(form: SignupFormData) {
-    const url = "/auth/signup";
-    await this.request("post", url, form);
+    const url = '/auth/signup';
+    await this.request('post', url, form);
   }
 }
