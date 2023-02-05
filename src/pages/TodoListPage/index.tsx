@@ -1,56 +1,17 @@
-import type * as CSS from 'csstype';
-
 import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { TodoApi, TodoListItemData } from '../apis/TodoApis';
-import { TodoCreateForm } from '../components/TodoCreateForm';
-import { TodoListItem } from '../components/TodoListItem';
-import { LoginContext } from '../contexts/LoginContext';
-
-const RootContainerStyle: CSS.Properties = {
-  border: '1px black solid',
-  display: 'flex',
-  flexDirection: 'column',
-  padding: '16px 24px',
-  alignItems: 'center',
-  margin: 'auto',
-};
-
-const ListContainer: CSS.Properties = {
-  display: 'flex',
-  flexDirection: 'column',
-  gap: '8px',
-  rowGap: '16px',
-  listStyleType: 'none',
-  padding: '0px',
-};
-
-const DividerStyle: CSS.Properties = {
-  width: '100%',
-  margin: '16px 0px 8px 0px',
-  border: '1px',
-  borderTop: '1px solid #eee',
-};
-
-const ListItemStyle: CSS.Properties = {
-  fontSize: '20px',
-  lineHeight: '2',
-  display: 'flex',
-  gap: '8px',
-};
-
-const MarkerStyle: CSS.Properties = {
-  display: 'flex',
-  alignItems: 'center',
-};
-
-function Empty() {
-  return (
-    <div>
-      <h1>할 일 목록이 없어요. 하나 만들어보세요!</h1>
-    </div>
-  );
-}
+import { TodoApi, TodoListItemData } from '../../apis/TodoApis';
+import { TodoCreateForm } from '../../components/TodoCreateForm';
+import { TodoListItem } from '../../components/TodoListItem';
+import { LoginContext } from '../../contexts/LoginContext';
+import {
+  DividerStyle,
+  Empty,
+  ListContainer,
+  ListItemStyle,
+  MarkerStyle,
+  RootContainerStyle,
+} from './style';
 
 const API_SERVER_URL = 'https://pre-onboarding-selection-task.shop';
 
@@ -67,7 +28,6 @@ export function TodoListPage() {
   };
 
   const handleCheckChange = (id: number) => async () => {
-    // 이렇게 처리해도 될까? 모르겠네
     const toChange = todos.find((todo) => todo.id === id);
     if (!toChange) {
       return;
@@ -78,7 +38,6 @@ export function TodoListPage() {
   };
 
   const handleSubmit = (id: number) => async (name: string) => {
-    // 이렇게 처리해도 될까? 모르겠네
     const toChange = todos.find((todo) => todo.id === id);
     if (!toChange) {
       return;
