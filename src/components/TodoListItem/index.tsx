@@ -31,7 +31,7 @@ export function TodoListItem({
   };
 
   return (
-    <div style={ContainerStyle}>
+    <li style={ContainerStyle}>
       <label style={LabelStyle}>
         <input
           style={CheckboxStyle}
@@ -71,6 +71,6 @@ export function TodoListItem({
           <Button id="delete-button" name="삭제" handleClick={handleDelete} />
         </>
       )}
-    </div>
+    </li>
   );
 }
