@@ -1,19 +1,18 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { TodoApi, TodoListItemData } from '../apis/TodoApis';
 import { TodoCreateForm } from '../components/TodoCreateForm';
 import { TodoListItem } from '../components/TodoListItem';
+import { LoginContext } from '../contexts/LoginContext';
 
-interface TodoListPageProps {
-  todoApi: TodoApi;
-  loggedIn: boolean;
-}
+const API_SERVER_URL = 'https://pre-onboarding-selection-task.shop';
 
-/*
-  TODO: List, Create 컴포넌트로 빼고, Page는 공유 상태만 관리하기로
-*/
-export function TodoListPage({ todoApi, loggedIn }: TodoListPageProps) {
+export function TodoListPage() {
+  const navigate = useNavigate();
+  const { loggedIn, accessToken } = useContext(LoginContext);
   const [loaded, setLoaded] = useState(false);
   const [todos, setTodos] = useState<TodoListItemData[]>([]);
+  const todoApi = new TodoApi(API_SERVER_URL, accessToken);
 
   const handleAddNewTodo = async (name: string) => {
     const createdTodo = await todoApi.createTodo(name);
@@ -51,13 +50,13 @@ export function TodoListPage({ todoApi, loggedIn }: TodoListPageProps) {
   useEffect(() => {
     (async function () {
       if (!loggedIn) {
-        return;
+        navigate('/signin');
       }
       const todos = await todoApi.fetchTodos();
       setTodos(todos);
       setLoaded(true);
     })();
-  }, [todoApi, loggedIn]);
+  }, []);
 
   if (!loggedIn) {
     return (
