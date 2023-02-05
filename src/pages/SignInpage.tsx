@@ -1,40 +1,13 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { BackendErrorResponse } from "../server";
-
-interface SignupFormData {
-  email: string;
-  password: string;
-}
-
-// TODO: 반환된 accessToken을 저장, 중복된 코드 컴포넌트화
-async function fetchSignIn(signupFormData: SignupFormData): Promise<string> {
-  const response = await fetch(
-    "https://pre-onboarding-selection-task.shop/auth/signin",
-    {
-      body: JSON.stringify(signupFormData),
-      method: "post",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }
-  );
-  console.log(response);
-  if (!response.ok) {
-    const body = (await response.json()) as BackendErrorResponse;
-    alert(body.message);
-    // TODO: 함수 진행 중단하기
-    return "";
-  }
-  // TODO: any인데 Typing하기
-  return (await response.json()).access_token;
-}
+import { AuthApi } from "../apis/AuthApi";
 
 interface SignInPageProps {
+  authApi: AuthApi;
   setAccessToken: (accessToken: string) => void;
 }
 
-export function SignInPage({ setAccessToken }: SignInPageProps) {
+export function SignInPage({ authApi, setAccessToken }: SignInPageProps) {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -110,7 +83,7 @@ export function SignInPage({ setAccessToken }: SignInPageProps) {
           data-testid="signin-button"
           disabled={!submitAvailable}
           onClick={async () => {
-            const accessToken = await fetchSignIn({ email, password });
+            const accessToken = await authApi.signInApi({ email, password });
             setAccessToken(accessToken);
             navigate("/todo");
             localStorage.setItem("accessToken", accessToken);

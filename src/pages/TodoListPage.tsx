@@ -1,121 +1,16 @@
 import { useEffect, useState } from "react";
+import { TodoApi, TodoListItemData } from "../apis/TodoApis";
 import { TodoListItem } from "../components/TodoListItem";
-import { BackendErrorResponse } from "../server";
-
-interface TodoListItemData {
-  id: number;
-  todo: string;
-  isCompleted: boolean;
-  userId: number;
-}
-
-async function fetchTodos(accessToken: string): Promise<TodoListItemData[]> {
-  const response = await fetch(
-    "https://pre-onboarding-selection-task.shop/todos",
-    {
-      method: "get",
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-        "Content-Type": "application/json",
-      },
-    }
-  );
-  console.log(response);
-  if (!response.ok) {
-    const body = (await response.json()) as BackendErrorResponse;
-    alert(body.message);
-    throw new Error("Backend Error!");
-  }
-  // TODO: any인데 Typing하기
-  return response.json();
-}
-
-// TODO: 반환된 accessToken을 저장, 중복된 코드 컴포넌트화
-async function createTodo(
-  accessToken: string,
-  name: string
-): Promise<TodoListItemData> {
-  const response = await fetch(
-    "https://pre-onboarding-selection-task.shop/todos",
-    {
-      method: "post",
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        todo: name,
-      }),
-    }
-  );
-  console.log(response);
-  if (!response.ok) {
-    const body = (await response.json()) as BackendErrorResponse;
-    alert(body.message);
-    throw new Error("Backend Error!");
-  }
-  // TODO: any인데 Typing하기
-  return response.json();
-}
-
-// TODO: 반환된 accessToken을 저장, 중복된 코드 컴포넌트화
-async function updateTodo(
-  accessToken: string,
-  toUpdate: TodoListItemData
-): Promise<TodoListItemData> {
-  const response = await fetch(
-    `https://pre-onboarding-selection-task.shop/todos/${toUpdate.id}`,
-    {
-      method: "put",
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        todo: toUpdate.todo,
-        isCompleted: toUpdate.isCompleted,
-      }),
-    }
-  );
-  console.log(response);
-  if (!response.ok) {
-    const body = (await response.json()) as BackendErrorResponse;
-    alert(body.message);
-    throw new Error("Backend Error!");
-  }
-  // TODO: any인데 Typing하기
-  return response.json();
-}
-
-// TODO: 반환된 accessToken을 저장, 중복된 코드 컴포넌트화
-async function deleteTodo(accessToken: string, id: number): Promise<void> {
-  const response = await fetch(
-    `https://pre-onboarding-selection-task.shop/todos/${id}`,
-    {
-      method: "delete",
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-        "Content-Type": "application/json",
-      },
-    }
-  );
-  console.log(response);
-  if (!response.ok) {
-    const body = (await response.json()) as BackendErrorResponse;
-    alert(body.message);
-    throw new Error("Backend Error!");
-  }
-}
 
 interface TodoListPageProps {
+  todoApi: TodoApi;
   loggedIn: boolean;
-  accessToken: string;
 }
 
 /*
   TODO: List, Create 컴포넌트로 빼고, Page는 공유 상태만 관리하기로
 */
-export function TodoListPage({ loggedIn, accessToken }: TodoListPageProps) {
+export function TodoListPage({ todoApi, loggedIn }: TodoListPageProps) {
   const [loaded, setLoaded] = useState(false);
   const [todos, setTodos] = useState<TodoListItemData[]>([]);
   const [createInput, setCreateInput] = useState("");
@@ -126,7 +21,7 @@ export function TodoListPage({ loggedIn, accessToken }: TodoListPageProps) {
       return;
     }
     toChange.isCompleted = !toChange.isCompleted;
-    await updateTodo(accessToken, toChange);
+    await todoApi.updateTodo(toChange);
     setTodos([...todos]);
   };
   const addNewTodo = (newItem: TodoListItemData) => {
@@ -139,11 +34,11 @@ export function TodoListPage({ loggedIn, accessToken }: TodoListPageProps) {
       return;
     }
     toChange.todo = name;
-    await updateTodo(accessToken, toChange);
+    await todoApi.updateTodo(toChange);
     setTodos([...todos]);
   };
   const handleDelete = (id: number) => async () => {
-    await deleteTodo(accessToken, id);
+    await todoApi.deleteTodo(id);
     setTodos(todos.filter((todo) => todo.id !== id));
   };
 
@@ -154,11 +49,11 @@ export function TodoListPage({ loggedIn, accessToken }: TodoListPageProps) {
         return;
       }
 
-      const todos = await fetchTodos(accessToken);
+      const todos = await todoApi.fetchTodos();
       setTodos(todos);
       setLoaded(true);
     })();
-  }, [loggedIn, accessToken]);
+  }, [todoApi, loggedIn]);
 
   if (!loggedIn) {
     return (
@@ -207,7 +102,7 @@ export function TodoListPage({ loggedIn, accessToken }: TodoListPageProps) {
       <button
         data-testid="new-todo-and-button"
         onClick={async () => {
-          const createdTodo = await createTodo(accessToken, createInput);
+          const createdTodo = await todoApi.createTodo(createInput);
           addNewTodo(createdTodo);
           setCreateInput("");
         }}
