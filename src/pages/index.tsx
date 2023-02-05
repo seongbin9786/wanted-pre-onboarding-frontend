@@ -1,19 +1,24 @@
 import { useEffect, useState } from "react";
 import { BrowserRouter, Link, Outlet, Route, Routes } from "react-router-dom";
 import { AuthApi } from "../apis/AuthApi";
+import { TodoApi } from "../apis/TodoApis";
 import { SignInPage } from "./SignInpage";
 import { SignUpPage } from "./SignUpPage";
 import { TodoListPage } from "./TodoListPage";
 
+const API_SERVER_URL = "https://pre-onboarding-selection-task.shop";
+
 // 한 번 생성하면 끝이어서 컴포넌트 바깥에서 생성
-const authApi = new AuthApi("https://pre-onboarding-selection-task.shop");
+const authApi = new AuthApi(API_SERVER_URL);
 
 export const RootRouter = () => {
+  const [todoApi, setTodoApi] = useState(new TodoApi(API_SERVER_URL));
   const [loggedIn, setLoggedIn] = useState(false);
   const [accessToken, setAccessToken] = useState("");
   const updateAccessToken = (newAccessToken: string) => {
     setAccessToken(newAccessToken);
     setLoggedIn(true);
+    setTodoApi(new TodoApi(API_SERVER_URL, accessToken));
   };
   const logout = () => {
     setAccessToken("");
@@ -26,6 +31,7 @@ export const RootRouter = () => {
     if (fromLocalStorage) {
       updateAccessToken(fromLocalStorage);
     }
+    // 함수는 바뀌지 않음
   }, []);
 
   return (
@@ -70,9 +76,7 @@ export const RootRouter = () => {
           <Route path="signup" element={<SignUpPage authApi={authApi} />} />
           <Route
             path="todo"
-            element={
-              <TodoListPage loggedIn={loggedIn} accessToken={accessToken} />
-            }
+            element={<TodoListPage loggedIn={loggedIn} todoApi={todoApi} />}
           />
           <Route
             path="*"
