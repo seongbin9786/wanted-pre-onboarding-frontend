@@ -24,17 +24,17 @@
 
 | 과제 번호 | 기능명 | Issue | PR |
 |----------|--------|-------|----|
-| `A0` | 로그인/회원가입 마크업 | #1 | #2 |
-| `A1` | 이메일/비밀번호 유효성 검사 | #3 | #6 |
-| `A2` | 회원가입 후 리다이렉션 | #4 | #6 |
-| `A3` | 로그인 후 리다이렉션, JWT 저장 | #5 | #6 |
-| `A4` | 로그인 여부에 따른 리다이렉션 | #20 | #29 |
-| `A5` | 투두 목록 마크업 | #7 | #13 |
-| `A6` | 투두 추가 기능 구현 | #8 | #13 |
-| `A7` | 투두 체크박스 구현 | #9 | #13 |
-| `A8` | 투두 수정/삭제 마크업 | #10, #12 | #14 |
-| `A9` | 투두 삭제 기능 구현 | #11 | #14 |
-| `A10` | 투두 수정 기능 구현 | #12 | #14 |
+| `A0` | 로그인/회원가입 마크업 | [#1](https://github.com/seongbin9786/wanted-pre-onboarding-frontend/issues/1) | [#2](https://github.com/seongbin9786/wanted-pre-onboarding-frontend/issues/2) |
+| `A1` | 이메일/비밀번호 유효성 검사 | [#3](https://github.com/seongbin9786/wanted-pre-onboarding-frontend/issues/3) | [#6](https://github.com/seongbin9786/wanted-pre-onboarding-frontend/issues/6) |
+| `A2` | 회원가입 후 리다이렉션 | [#4](https://github.com/seongbin9786/wanted-pre-onboarding-frontend/issues/4) | [#6](https://github.com/seongbin9786/wanted-pre-onboarding-frontend/issues/6) |
+| `A3` | 로그인 후 리다이렉션, JWT 저장 | [#5](https://github.com/seongbin9786/wanted-pre-onboarding-frontend/issues/5) | [#6](https://github.com/seongbin9786/wanted-pre-onboarding-frontend/issues/6) |
+| `A4` | 로그인 여부에 따른 리다이렉션 | [#20](https://github.com/seongbin9786/wanted-pre-onboarding-frontend/2issues/0) | [#29](https://github.com/seongbin9786/wanted-pre-onboarding-frontend/2issues/9) |
+| `A5` | 투두 목록 마크업 | [#7](https://github.com/seongbin9786/wanted-pre-onboarding-frontend/issues/7) | [#13](https://github.com/seongbin9786/wanted-pre-onboarding-frontend/issues/13) |
+| `A6` | 투두 추가 기능 구현 | [#8](https://github.com/seongbin9786/wanted-pre-onboarding-frontend/issues/8) | [#13](https://github.com/seongbin9786/wanted-pre-onboarding-frontend/issues/13) |
+| `A7` | 투두 체크박스 구현 | [#9](https://github.com/seongbin9786/wanted-pre-onboarding-frontend/issues/9) | [#13](https://github.com/seongbin9786/wanted-pre-onboarding-frontend/issues/13) |
+| `A8` | 투두 수정/삭제 마크업 | [#10](https://github.com/seongbin9786/wanted-pre-onboarding-frontend/issues/10), [#12](https://github.com/seongbin9786/wanted-pre-onboarding-frontend/issues/12) | [#14](https://github.com/seongbin9786/wanted-pre-onboarding-frontend/issues/14) |
+| `A9` | 투두 삭제 기능 구현 | [#11](https://github.com/seongbin9786/wanted-pre-onboarding-frontend/issues/11) | [#14](https://github.com/seongbin9786/wanted-pre-onboarding-frontend/issues/14) |
+| `A10` | 투두 수정 기능 구현 | [#12](https://github.com/seongbin9786/wanted-pre-onboarding-frontend/issues/12) | [#14](https://github.com/seongbin9786/wanted-pre-onboarding-frontend/issues/14) |
 
 ### 자율성과 창의력을 발휘한 부분
 
@@ -50,7 +50,7 @@
 
 | 번호 | 작업명 | Issue | PR |
 |------|-------|-------|----|
-| 1 | API 호출 함수를 페이지 요소로부터 분리 | #15 | #26 |
-| 2 | Todo List에서 CreateForm 컴포넌트 분리 | #17 | #28 |
-| 3 | SignIn, SignUp 페이지 간 중복 제거 | #18 | #28 | 
-| 4 | AccessToken 상태 관리를 분리 | #19 | #29 |
+| 1 | API 호출 함수를 페이지 요소로부터 분리 | [#15](https://github.com/seongbin9786/wanted-pre-onboarding-frontend/issues/15) | [#26](https://github.com/seongbin9786/wanted-pre-onboarding-frontend/issues/26) |
+| 2 | Todo List에서 CreateForm 컴포넌트 분리 | [#17](https://github.com/seongbin9786/wanted-pre-onboarding-frontend/issues/17) | [#28](https://github.com/seongbin9786/wanted-pre-onboarding-frontend/issues/28) |
+| 3 | SignIn, SignUp 페이지 간 중복 제거 | [#18](https://github.com/seongbin9786/wanted-pre-onboarding-frontend/issues/18) | [#28](https://github.com/seongbin9786/wanted-pre-onboarding-frontend/issues/28) | 
+| 4 | AccessToken 상태 관리를 분리 | [#19](https://github.com/seongbin9786/wanted-pre-onboarding-frontend/issues/19) | [#29](https://github.com/seongbin9786/wanted-pre-onboarding-frontend/issues/29) |
