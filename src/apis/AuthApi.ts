@@ -18,7 +18,6 @@ export class AuthApi extends AbstractApi {
   async signInApi(form: SigninFormData) {
     const url = '/auth/signin';
     const response = await this.request<SignInApiResponse>('post', url, form);
-    console.log(response.access_token);
     return response.access_token;
   }
 

@@ -6,8 +6,17 @@ export interface CreateFormProps {
   onAddNewTodo: (name: string) => void;
 }
 
+/**
+ * Todo를 생성하는 폼
+ * - 입력 필드와 작성 버튼을 포함
+ */
 export function TodoCreateForm({ onAddNewTodo: addNewTodo }: CreateFormProps) {
   const [createInput, setCreateInput] = useState('');
+
+  const handleButtonClick = async () => {
+    addNewTodo(createInput);
+    setCreateInput('');
+  };
 
   return (
     <div style={ContainerStyle}>
@@ -18,12 +27,9 @@ export function TodoCreateForm({ onAddNewTodo: addNewTodo }: CreateFormProps) {
         onChange={(e) => setCreateInput(e.target.value)}
       />
       <Button
-        data-testid="new-todo-and-button"
+        id="new-todo-add-button"
         name="추가"
-        handleClick={async () => {
-          addNewTodo(createInput);
-          setCreateInput('');
-        }}
+        handleClick={handleButtonClick}
       />
     </div>
   );

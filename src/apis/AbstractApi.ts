@@ -1,5 +1,19 @@
-import { BackendErrorResponse } from '../server';
+/**
+ * 백엔드에서 사용하는 오류 시 반환값(response.body)
+ * - 해당 값에서 메시지를 추출해 표시
+ */
+interface BackendErrorResponse {
+  statusCode: number;
+  message: string;
+  error: string;
+}
 
+/**
+ * 타 Api 요청 코드의 재사용을 위한 클래스
+ * - 반복되는 코드를 해당 클래스에서 정의 후 하위 클래스에서 직접 사용
+ * - composition이 아니라 상속을 사용한 이유는 개발자 입장에서의 사용성 때문
+ *    - AuthApi, TodoApi를 생성하기 위해 AbstractApi를 매번 생성하는 게 불편
+ */
 export class AbstractApi {
   private readonly accessToken: string;
   private readonly baseUrl: string;
