@@ -1,8 +1,39 @@
 # 원티드 프리온보딩 프론트엔드 - 선발 과제
 
-## 1. 작성자
+## 1. 프로젝트의 실행 방법
 
-김성빈(seongbin9786@gmail.com)
+1. [배포된 웹사이트](https://wanted-pre-onboarding-frontend-one-iota.vercel.app/)에 방문합니다.
+
+    <img src="https://user-images.githubusercontent.com/28754907/216826571-d5ece146-d2f8-4a92-8740-7884c05a1041.png" width="300px" />
+
+2. 회원가입을 수행합니다.
+
+    <img src="https://user-images.githubusercontent.com/28754907/216826633-77b46839-b478-4332-9106-2581cedeb411.png" width="300px" />
+
+3. 로그인합니다.
+
+    <img src="https://user-images.githubusercontent.com/28754907/216826642-46d37bc9-be15-4318-b2b6-aa8f4484daec.png" width="300px" />
+
+4. 할일 목록 페이지로 이동되면, 새로운 할 일을 생성합니다.
+
+    <img src="https://user-images.githubusercontent.com/28754907/216826668-1ae280c7-dff3-48a5-abd2-28ce6c56e9a2.png" width="300px" />
+
+5. 할 일을 생성됐음을 확인할 수 있습니다.
+
+    <img src="https://user-images.githubusercontent.com/28754907/216826686-483ef214-9382-4b8b-8be0-d4b3e95ad2ed.png" width="300px" />
+
+6. 생성된 할 일을 수정할 수 있습니다. 제출 버튼을 누르면 수정됐음을 확인할 수 있습니다.
+
+    <img src="https://user-images.githubusercontent.com/28754907/216826695-bd792a4c-50c4-4177-93f1-1e2482ad6177.png" width="300px" />
+
+    <img src="https://user-images.githubusercontent.com/28754907/216826712-a140b785-4e49-4401-8460-2cb9b6798a05.png" width="300px" />
+
+7. 할 일을 삭제할 수 있습니다. 삭제 버튼을 누르면 삭제됐음을 확인할 수 있습니다.
+
+    <img src="https://user-images.githubusercontent.com/28754907/216826718-5eb4a987-d361-4ee9-b35f-ddf6f0f2a225.png" width="300px" />
+
+
+
 
 ## 2. 배포 주소
 
