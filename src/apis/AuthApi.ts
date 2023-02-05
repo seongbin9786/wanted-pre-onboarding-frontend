@@ -11,14 +11,15 @@ export interface SigninFormData {
 }
 
 interface SignInApiResponse {
-  acess_token: string;
+  access_token: string;
 }
 
 export class AuthApi extends AbstractApi {
   async signInApi(form: SigninFormData) {
     const url = "/auth/signin";
     const response = await this.request<SignInApiResponse>("post", url, form);
-    return response.acess_token;
+    console.log(response.access_token);
+    return response.access_token;
   }
 
   async signUpApi(form: SignupFormData) {

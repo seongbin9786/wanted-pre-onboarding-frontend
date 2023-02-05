@@ -18,7 +18,7 @@ export const RootRouter = () => {
   const updateAccessToken = (newAccessToken: string) => {
     setAccessToken(newAccessToken);
     setLoggedIn(true);
-    setTodoApi(new TodoApi(API_SERVER_URL, accessToken));
+    setTodoApi(new TodoApi(API_SERVER_URL, newAccessToken));
   };
   const logout = () => {
     setAccessToken("");

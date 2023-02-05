@@ -26,7 +26,7 @@ export class AbstractApi {
   }
 
   private createFetchConfig(requestMethod: string, inputData: object | null) {
-    const config = {
+    const config: RequestInit = {
       method: requestMethod,
       headers: {
         "Content-Type": "application/json",
@@ -34,15 +34,14 @@ export class AbstractApi {
     };
 
     if (inputData) {
-      Object.defineProperty(config, "body", JSON.stringify(inputData));
+      config["body"] = JSON.stringify(inputData);
     }
 
     if (this.accessToken) {
-      Object.defineProperty(
-        config.headers,
-        "Authorization",
-        `Bearer ${this.accessToken}`
-      );
+      config.headers = {
+        ...config.headers,
+        Authorization: `Bearer ${this.accessToken}`,
+      };
     }
 
     return config;
