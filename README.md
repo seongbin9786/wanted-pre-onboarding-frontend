@@ -8,11 +8,13 @@
 
 [배포 주소](wanted-pre-onboarding-frontend-bvv9kdntp-seongbin9786.vercel.app)
 
+- 웹사이트는 vercel을 사용해 `main` 브랜치의 최신 버전이 푸시될 때마다 자동으로 배포됩니다.
+
 ## 3. 사용한 라이브러리
 
 ### 3-1. 기능
 
-모든 기능은 vanilla JavaScript로 직접 구현
+모든 기능은 vanilla JavaScript로 직접 구현했습니다.
 
 ### 3-2. 테스트 (UI) ([#32](https://github.com/seongbin9786/wanted-pre-onboarding-frontend/issues/32))
 
