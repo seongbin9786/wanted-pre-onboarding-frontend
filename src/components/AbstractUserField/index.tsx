@@ -1,4 +1,4 @@
-import type * as CSS from 'csstype';
+import { CotainerStyle, InputStyle, LabelStyle } from './style';
 
 interface UserAbstractFieldProps {
   id: string;
@@ -7,22 +7,6 @@ interface UserAbstractFieldProps {
   type: 'text' | 'password';
   handleChange: (newValue: string) => void;
 }
-
-const CotainerStyle: CSS.Properties = {
-  display: 'flex',
-  flexDirection: 'column',
-  gap: '4px',
-};
-
-const LabelStyle: CSS.Properties = {
-  display: 'block',
-};
-
-const InputStyle: CSS.Properties = {
-  height: '24px',
-  padding: '4px 8px',
-  fontSize: '16px',
-};
 
 export function UserAbstractField({
   id,

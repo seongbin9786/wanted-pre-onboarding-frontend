@@ -1,9 +1,17 @@
 import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { TodoApi, TodoListItemData } from '../apis/TodoApis';
-import { TodoCreateForm } from '../components/TodoCreateForm';
-import { TodoListItem } from '../components/TodoListItem';
-import { LoginContext } from '../contexts/LoginContext';
+import { TodoApi, TodoListItemData } from '../../apis/TodoApis';
+import { TodoCreateForm } from '../../components/TodoCreateForm';
+import { TodoListItem } from '../../components/TodoListItem';
+import { LoginContext } from '../../contexts/LoginContext';
+import {
+  DividerStyle,
+  Empty,
+  ListContainer,
+  ListItemStyle,
+  MarkerStyle,
+  RootContainerStyle,
+} from './style';
 
 const API_SERVER_URL = 'https://pre-onboarding-selection-task.shop';
 
@@ -20,7 +28,6 @@ export function TodoListPage() {
   };
 
   const handleCheckChange = (id: number) => async () => {
-    // 이렇게 처리해도 될까? 모르겠네
     const toChange = todos.find((todo) => todo.id === id);
     if (!toChange) {
       return;
@@ -31,7 +38,6 @@ export function TodoListPage() {
   };
 
   const handleSubmit = (id: number) => async (name: string) => {
-    // 이렇게 처리해도 될까? 모르겠네
     const toChange = todos.find((todo) => todo.id === id);
     if (!toChange) {
       return;
@@ -58,33 +64,22 @@ export function TodoListPage() {
     })();
   }, []);
 
-  if (!loggedIn) {
-    return (
-      <div>
-        <h1>You're not logged in!</h1>
-      </div>
-    );
-  }
-
-  if (!loaded) {
-    return (
-      <div>
-        <h1>loading...</h1>
-      </div>
-    );
+  if (!loggedIn || !loaded) {
+    return null;
   }
 
   return (
-    <div>
-      <h1>Your todos:</h1>
+    <div style={RootContainerStyle}>
+      <h1>남은 할일 목록!</h1>
+      <TodoCreateForm onAddNewTodo={handleAddNewTodo} />
+      <hr style={DividerStyle} />
       {todos.length === 0 ? (
-        <div>
-          <h1>list is empty...</h1>
-        </div>
+        <Empty />
       ) : (
-        <ol style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-          {todos.map(({ id, todo, isCompleted }) => (
-            <li key={id}>
+        <ol style={ListContainer}>
+          {todos.map(({ id, todo, isCompleted }, idx) => (
+            <li style={ListItemStyle} key={id}>
+              <span style={MarkerStyle}>{idx + 1}.</span>
               <TodoListItem
                 name={todo}
                 checked={isCompleted}
@@ -96,7 +91,6 @@ export function TodoListPage() {
           ))}
         </ol>
       )}
-      <TodoCreateForm onAddNewTodo={handleAddNewTodo} />
     </div>
   );
 }

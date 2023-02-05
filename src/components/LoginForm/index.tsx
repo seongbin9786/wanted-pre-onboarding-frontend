@@ -1,21 +1,7 @@
-import type * as CSS from 'csstype';
 import { useState } from 'react';
-import { UserEmailField } from './UserEmailField';
-import { UserPasswordField } from './UserPasswordField';
-
-const LoginFormStyle: CSS.Properties = {
-  display: 'flex',
-  flexDirection: 'column',
-  maxWidth: '300px',
-  gap: '16px',
-  padding: '32px 16px',
-  backgroundColor: 'darkgray',
-};
-
-const LoginButtonStyle: CSS.Properties = {
-  height: '48px',
-  marginTop: '4px',
-};
+import { UserEmailField } from '../UserEmailField';
+import { UserPasswordField } from '../UserPasswordField';
+import { LoginButtonStyle, LoginFormStyle } from './style';
 
 interface LoginFormProps {
   mode: 'signin' | 'signup';

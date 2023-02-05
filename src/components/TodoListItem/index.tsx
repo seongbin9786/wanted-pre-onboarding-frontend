@@ -1,4 +1,12 @@
 import { useState } from 'react';
+import { Button } from '../Button';
+import {
+  CheckboxStyle,
+  ContainerStyle,
+  LabelStyle,
+  ModifyInputStyle,
+  NameStyle,
+} from './style';
 
 interface TodoListItemProps {
   name: string;
@@ -23,9 +31,10 @@ export function TodoListItem({
   };
 
   return (
-    <div style={{ display: 'flex', gap: 16, height: 48, alignItems: 'center' }}>
-      <label style={{ width: 240, display: 'flex', gap: 4 }}>
+    <div style={ContainerStyle}>
+      <label style={LabelStyle}>
         <input
+          style={CheckboxStyle}
           type="checkbox"
           name="checked"
           defaultChecked={checked}
@@ -33,38 +42,33 @@ export function TodoListItem({
         />
         {modifyMode ? (
           <input
+            style={ModifyInputStyle}
             data-testid="modify-input"
             value={input}
             onChange={(e) => setInput(e.target.value)}
           />
         ) : (
-          <span>{name}</span>
+          <span style={NameStyle}>{name}</span>
         )}
       </label>
 
       {modifyMode ? (
         <>
-          <button data-testid="submit-button" onClick={commitModified}>
-            제출
-          </button>
-          <button
-            data-testid="cancel-button"
-            onClick={() => setModifyMode(false)}
-          >
-            취소
-          </button>
+          <Button id="submit-button" name="제출" handleClick={commitModified} />
+          <Button
+            id="cancel-button"
+            name="취소"
+            handleClick={() => setModifyMode(false)}
+          />
         </>
       ) : (
         <>
-          <button
-            data-testid="modify-button"
-            onClick={() => setModifyMode(true)}
-          >
-            수정
-          </button>
-          <button data-testid="delete-button" onClick={handleDelete}>
-            삭제
-          </button>
+          <Button
+            id="modify-button"
+            name="수정"
+            handleClick={() => setModifyMode(true)}
+          />
+          <Button id="delete-button" name="삭제" handleClick={handleDelete} />
         </>
       )}
     </div>
