@@ -1,4 +1,7 @@
+import type * as CSS from 'csstype';
+
 import { useState } from 'react';
+import { Button } from './Button';
 
 interface TodoListItemProps {
   name: string;
@@ -22,10 +25,39 @@ export function TodoListItem({
     setModifyMode(false);
   };
 
+  const ContainerStyle: CSS.Properties = {
+    display: 'flex',
+    gap: '16px',
+    alignItems: 'center',
+  };
+
+  const LabelStyle: CSS.Properties = {
+    width: '240px',
+    display: 'flex',
+    gap: '8px',
+  };
+
+  const CheckboxStyle: CSS.Properties = {
+    minWidth: '18px',
+    accentColor: '#333',
+  };
+
+  const ModifyInputStyle: CSS.Properties = {
+    fontSize: '18px',
+    lineHeight: '1.5',
+    padding: '4px 8px',
+    width: '100px',
+  };
+
+  const NameStyle: CSS.Properties = {
+    fontStyle: 'italic',
+  };
+
   return (
-    <div style={{ display: 'flex', gap: 16, height: 48, alignItems: 'center' }}>
-      <label style={{ width: 240, display: 'flex', gap: 4 }}>
+    <div style={ContainerStyle}>
+      <label style={LabelStyle}>
         <input
+          style={CheckboxStyle}
           type="checkbox"
           name="checked"
           defaultChecked={checked}
@@ -33,38 +65,33 @@ export function TodoListItem({
         />
         {modifyMode ? (
           <input
+            style={ModifyInputStyle}
             data-testid="modify-input"
             value={input}
             onChange={(e) => setInput(e.target.value)}
           />
         ) : (
-          <span>{name}</span>
+          <span style={NameStyle}>{name}</span>
         )}
       </label>
 
       {modifyMode ? (
         <>
-          <button data-testid="submit-button" onClick={commitModified}>
-            제출
-          </button>
-          <button
-            data-testid="cancel-button"
-            onClick={() => setModifyMode(false)}
-          >
-            취소
-          </button>
+          <Button id="submit-button" name="제출" handleClick={commitModified} />
+          <Button
+            id="cancel-button"
+            name="취소"
+            handleClick={() => setModifyMode(false)}
+          />
         </>
       ) : (
         <>
-          <button
-            data-testid="modify-button"
-            onClick={() => setModifyMode(true)}
-          >
-            수정
-          </button>
-          <button data-testid="delete-button" onClick={handleDelete}>
-            삭제
-          </button>
+          <Button
+            id="modify-button"
+            name="수정"
+            handleClick={() => setModifyMode(true)}
+          />
+          <Button id="delete-button" name="삭제" handleClick={handleDelete} />
         </>
       )}
     </div>
