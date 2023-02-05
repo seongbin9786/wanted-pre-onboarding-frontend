@@ -1,4 +1,4 @@
-import { AbstractApi } from "./AbstractApi";
+import { AbstractApi } from './AbstractApi';
 
 export interface TodoListItemData {
   id: number;
@@ -9,16 +9,16 @@ export interface TodoListItemData {
 
 export class TodoApi extends AbstractApi {
   async fetchTodos() {
-    const url = "/todos";
-    return this.request<TodoListItemData[]>("get", url, null);
+    const url = '/todos';
+    return this.request<TodoListItemData[]>('get', url, null);
   }
 
   async createTodo(name: string) {
-    const url = "/todos";
+    const url = '/todos';
     const body = {
       todo: name,
     };
-    return this.request<TodoListItemData>("get", url, body);
+    return this.request<TodoListItemData>('get', url, body);
   }
 
   async updateTodo({ id, todo, isCompleted }: TodoListItemData) {
@@ -27,11 +27,11 @@ export class TodoApi extends AbstractApi {
       todo,
       isCompleted,
     };
-    return this.request<TodoListItemData>("put", url, body);
+    return this.request<TodoListItemData>('put', url, body);
   }
 
   async deleteTodo(id: number) {
     const url = `/todos/${id}`;
-    await this.request("delete", url, null);
+    await this.request('delete', url, null);
   }
 }

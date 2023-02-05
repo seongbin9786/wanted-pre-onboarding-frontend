@@ -1,4 +1,4 @@
-import { BackendErrorResponse } from "../server";
+import { BackendErrorResponse } from '../server';
 
 export class AbstractApi {
   private readonly accessToken: string;
@@ -6,7 +6,7 @@ export class AbstractApi {
 
   constructor(baseUrl: string, accessToken?: string) {
     this.baseUrl = baseUrl;
-    this.accessToken = accessToken || "";
+    this.accessToken = accessToken || '';
   }
 
   /**
@@ -29,12 +29,12 @@ export class AbstractApi {
     const config: RequestInit = {
       method: requestMethod,
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
     };
 
     if (inputData) {
-      config["body"] = JSON.stringify(inputData);
+      config['body'] = JSON.stringify(inputData);
     }
 
     if (this.accessToken) {

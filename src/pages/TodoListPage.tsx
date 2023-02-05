@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
-import { TodoApi, TodoListItemData } from "../apis/TodoApis";
-import { TodoListItem } from "../components/TodoListItem";
+import { useEffect, useState } from 'react';
+import { TodoApi, TodoListItemData } from '../apis/TodoApis';
+import { TodoListItem } from '../components/TodoListItem';
 
 interface TodoListPageProps {
   todoApi: TodoApi;
@@ -13,7 +13,7 @@ interface TodoListPageProps {
 export function TodoListPage({ todoApi, loggedIn }: TodoListPageProps) {
   const [loaded, setLoaded] = useState(false);
   const [todos, setTodos] = useState<TodoListItemData[]>([]);
-  const [createInput, setCreateInput] = useState("");
+  const [createInput, setCreateInput] = useState('');
   const handleCheckChange = (id: number) => async () => {
     // 이렇게 처리해도 될까? 모르겠네
     const toChange = todos.find((todo) => todo.id === id);
@@ -78,7 +78,7 @@ export function TodoListPage({ todoApi, loggedIn }: TodoListPageProps) {
           <h1>list is empty...</h1>
         </div>
       ) : (
-        <ol style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+        <ol style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
           {todos.map((todo) => (
             <li key={todo.id}>
               <TodoListItem
@@ -104,7 +104,7 @@ export function TodoListPage({ todoApi, loggedIn }: TodoListPageProps) {
         onClick={async () => {
           const createdTodo = await todoApi.createTodo(createInput);
           addNewTodo(createdTodo);
-          setCreateInput("");
+          setCreateInput('');
         }}
       >
         추가
