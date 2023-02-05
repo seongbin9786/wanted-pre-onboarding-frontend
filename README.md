@@ -1,306 +1,97 @@
 # 원티드 프리온보딩 프론트엔드 - 선발 과제
 
-## 구현 조건
+## 1. 작성자
 
-1. Create React App 사용
-2. 함수 컴포넌트를 이용해서 진행해주세요
-3. UI는 자유
-4. README.md 작성 필수
-   - 프로젝트의 실행 방법
-   - 데모 영상
-   - 데모 영상은 배포 링크로 대체 가능하며, 배포가 되었고 배포된 사이트에서 기능이 모두 동작하면 가산점이 부여됩니다.
-5. 기능구현에 직접적으로 연관된 라이브러리 사용은 허용되지 않습니다.(React-Query 등)
-6. 사용가능한 라이브러리 목록은 아래와 같습니다.
-   - React Router
-   - HTTP Client 라이브러리(Axios 등)
-   - 스타일링 관련 라이브러리(Sass, Styled Components, Emotion 등)
-   - 아이콘 등 UI 관련 라이브러리(Font-Awesome, React-Icons, Bootstrap 등)
-   - 기능과 직접적인 연관이 없는 설정관련 라이브러리(craco, dotenv 등)
+김성빈(seongbin9786@gmail.com)
 
-## 과제
+## 2. 배포 주소
 
-- 과제 수행 과정에서 지원자분들의 자율성과 창의력을 발휘하는 것을 기대하고 존중합니다.
+[배포 주소](wanted-pre-onboarding-frontend-bvv9kdntp-seongbin9786.vercel.app)
 
-### :: 1. 로그인 / 회원가입
+- 웹사이트는 vercel을 사용해 `main` 브랜치의 최신 버전이 푸시될 때마다 자동으로 배포됩니다.
 
-- `/signup` 경로에 회원가입 기능을 개발해주세요
-- `/signin` 경로에 로그인 기능을 개발해주세요
+## 3. 사용한 라이브러리
 
-  - 페이지 안에 이메일 input, 비밀번호 input, 제출 button이 포함된 형태로 구성해주세요
+### 3-1. 기능
 
-    - 이메일 input에 `data-testid="email-input"` 속성을 부여해주세요
-    - 패스워드 input에 `data-testid="password-input"` 속성을 부여해주세요
-    - 회원가입 button에 `data-testid="signup-button"` 속성을 부여해주세요
-    - 로그인 button에 `data-testid="signin-button"` 속성을 부여해주세요
+모든 기능은 vanilla JavaScript로 직접 구현했습니다.
 
-    ```html
-    <!-- 예시 -->
-    <input data-testid="email-input" />
-    <input data-testid="password-input" />
-    <button data-testid="signup-button">회원가입</button>
-    ```
+### 3-2. 테스트 (UI) ([#32](https://github.com/seongbin9786/wanted-pre-onboarding-frontend/issues/32))
 
-- 두 페이지의 UI는 동일해도 무방합니다.
+- [Cypress](https://www.cypress.io/)
+- ![cypress](https://github.com/seongbin9786/wanted-pre-onboarding-frontend/blob/main/docs/images/cypress.png)
 
-#### Assignment 1
+### 3-3. 코드 컨벤션 ([#27](https://github.com/seongbin9786/wanted-pre-onboarding-frontend/issues/27))
 
-- 회원가입과 로그인 페이지에 이메일과 비밀번호의 유효성 검사기능을 구현해주세요
+- [ESLint](https://eslint.org/)
+- [Prettier](https://prettier.io/)
 
-  - 이메일 조건: `@` 포함
-  - 비밀번호 조건: 8자 이상
-  - 이메일과 비밀번호의 유효성 검사 조건은 별도의 추가 조건 부여 없이 위의 조건대로만 진행해주세요 (e.g. 비밀번호 유효성 검사에 특수문자 포함 등의 새로운 조건을 추가하는 행위를 지양해주세요)
+## 4. 기능 목록표
 
-- 입력된 이메일과 비밀번호가 유효성 검사를 통과하지 못한다면 button에 `disabled` 속성을 부여해주세요
-- 보안 상 실제 사용하고 계신 이메일과 패스워드말고 테스트용 이메일, 패스워드 사용을 권장드립니다.
+| 과제 번호 | 기능명 | Issue | PR |
+|----------|--------|-------|----|
+| `A0` | 로그인/회원가입 마크업 | [#1](https://github.com/seongbin9786/wanted-pre-onboarding-frontend/issues/1) | [#2](https://github.com/seongbin9786/wanted-pre-onboarding-frontend/issues/2) |
+| `A1` | 이메일/비밀번호 유효성 검사 | [#3](https://github.com/seongbin9786/wanted-pre-onboarding-frontend/issues/3) | [#6](https://github.com/seongbin9786/wanted-pre-onboarding-frontend/issues/6) |
+| `A2` | 회원가입 후 리다이렉션 | [#4](https://github.com/seongbin9786/wanted-pre-onboarding-frontend/issues/4) | [#6](https://github.com/seongbin9786/wanted-pre-onboarding-frontend/issues/6) |
+| `A3` | 로그인 후 리다이렉션, JWT 저장 | [#5](https://github.com/seongbin9786/wanted-pre-onboarding-frontend/issues/5) | [#6](https://github.com/seongbin9786/wanted-pre-onboarding-frontend/issues/6) |
+| `A4` | 로그인 여부에 따른 리다이렉션 | [#20](https://github.com/seongbin9786/wanted-pre-onboarding-frontend/2issues/0) | [#29](https://github.com/seongbin9786/wanted-pre-onboarding-frontend/2issues/9) |
+| `A5` | 투두 목록 마크업 | [#7](https://github.com/seongbin9786/wanted-pre-onboarding-frontend/issues/7) | [#13](https://github.com/seongbin9786/wanted-pre-onboarding-frontend/issues/13) |
+| `A6` | 투두 추가 기능 구현 | [#8](https://github.com/seongbin9786/wanted-pre-onboarding-frontend/issues/8) | [#13](https://github.com/seongbin9786/wanted-pre-onboarding-frontend/issues/13) |
+| `A7` | 투두 체크박스 구현 | [#9](https://github.com/seongbin9786/wanted-pre-onboarding-frontend/issues/9) | [#13](https://github.com/seongbin9786/wanted-pre-onboarding-frontend/issues/13) |
+| `A8` | 투두 수정/삭제 마크업 | [#10](https://github.com/seongbin9786/wanted-pre-onboarding-frontend/issues/10), [#12](https://github.com/seongbin9786/wanted-pre-onboarding-frontend/issues/12) | [#14](https://github.com/seongbin9786/wanted-pre-onboarding-frontend/issues/14) |
+| `A9` | 투두 삭제 기능 구현 | [#11](https://github.com/seongbin9786/wanted-pre-onboarding-frontend/issues/11) | [#14](https://github.com/seongbin9786/wanted-pre-onboarding-frontend/issues/14) |
+| `A10` | 투두 수정 기능 구현 | [#12](https://github.com/seongbin9786/wanted-pre-onboarding-frontend/issues/12) | [#14](https://github.com/seongbin9786/wanted-pre-onboarding-frontend/issues/14) |
 
-#### Assignment 2
+### 4-1. 자율성과 창의력을 발휘한 부분
 
-- 회원가입 페이지에서 버튼을 클릭 시 회원가입을 진행하고 회원가입이 정상적으로 완료되었을 시 `/signin` 경로로 이동해주세요
+#### 4-1-1. 로그인 여부 상태
 
-#### Assignment 3
+`login`으로 추상화하여 이해를 명확하게 할 수 있도록 구현했습니다. 또한 accessToken을 체크 조건에 사용하기보다 `loggedIn` 조건을 활용했습니다.
 
-- 로그인 페이지에서 버튼을 클릭 시, 로그인을 진행하고 로그인이 정상적으로 완료되었을 시 `/todo` 경로로 이동해주세요
+### 4-1-2. Cypress를 활용한 E2E 테스트
 
-  - 로그인 API는 로그인이 성공했을 시 Response Body에 JWT를 포함해서 응답합니다.
-  - 응답받은 JWT는 로컬 스토리지에 저장해주세요
+문제의 요구사항을 토대로 자동화된 검증 과정을 구성하는 방법을 통해 구현을 점검하고자 Cypress를 활용했습니다. 수동으로 테스트했을 땐 쉽게 각 기능이 구현됐다고 생각했지만, 실제로 `data-testid`를 활용해 테스트하면서 `testid`의 오타 및 누락 등 여러 건의 오류를 잡을 수 있었습니다.
 
-#### Assignment 4
+## 5. 설계
 
-- 로그인 여부에 따른 리다이렉트 처리를 구현해주세요
+### 5-1. 각 상세 설명
 
-  - 로컬 스토리지에 토큰이 있는 상태로 `/signin` 또는 `/signup` 페이지에 접속한다면 `/todo` 경로로 리다이렉트 시켜주세요
-  - 로컬 스토리지에 토큰이 없는 상태로 `/todo`페이지에 접속한다면 `/signin` 경로로 리다이렉트 시켜주세요
+#### 5-1-1. API 요청 logic 분리
 
----
+ 1. 코드 재사용
+    1. `AbstractApi` 클래스에서 Auth, Todo Api 요청에 필요한 코드를 재사용할 수 있게 구현했습니다.
+    2. 덕분에 각 endpoint에 요청하는 메소드의 길이는 1-6 라인입니다.
+ 2. 요청, 응답 Typing
+    1. 입력 `FormData`, 응답 `Response` 인터페이스를 정의해 활용했습니다.
 
-### :: 2. TODO LIST
+#### 5-1-2. components/page 분리
 
-#### Assignment 5
+1. Page는 페이지 단위의 기능을 구현하고 소속 컴포넌트 간 데이터 공유를 구현했습니다.
+2. Component는 단위로 분리되는 기능들을 최대한 구현 및 캡슐화했습니다.
 
-- `/todo`경로에 접속하면 투두 리스트의 목록을 볼 수 있도록 해주세요
-- 목록에서는 TODO의 내용과 완료 여부가 표시되어야 합니다.
-- TODO의 완료 여부는 `<input type="checkbox" />`를 통해 표현해주세요
-- TODO는 `<li>` tag를 이용해 감싸주세요
+#### 5-1-3. style과 logic의 분리
 
-```html
-<li>
-  <label>
-    <input type="checkbox" />
-    <span>TODO 1</span>
-  </label>
-</li>
-<li>
-  <label>
-    <input type="checkbox" />
-    <span>TODO 2</span>
-  </label>
-</li>
-```
+1. 컴포넌트의 스타일 요소는 모두 `style.tsx`로 분리했습니다.
+2. 상태 관리 및 HTML 구성만 각 컴포넌트(`index.tsx`)에서 수행했습니다.
 
-#### Assignment 6
+#### 5-1-4. Login Context 사용
 
-- 리스트 페이지에 새로운 TODO를 입력할 수 있는 input과 추가 button을 만들어주세요
+1. 로그인에 필요한 상태 관리의 적절한 위치가 없어 Context로 관리했습니다.
+   1. 이전에는 가장 상위 컴포넌트에서 수행했으나 여러 로직이 해당 컴포넌트에 있어 가독성이 좋지 않았습니다.
+   2. 값 관리: `loggedIn, accessToken`
+   3. 함수 구현: `login, logout`
+2. 이후 최상위 Page가 아닌 깊은 곳의 컴포넌트에서 사용자 정보가 필요할 때를 해당 기능 구현이 수월할 것입니다.
 
-  - TODO 입력 input에는 `data-testid="new-todo-input"` 속성을 부여해주세요
-  - TODO 추가 button에는 `data-testid="new-todo-add-button"` 속성을 부여해주세요
+#### 5-1-5. 문자열 리소스를 상수로 관리
 
-    ```html
-    <input data-testid="new-todo-input" />
-    <button data-testid="new-todo-add-button">추가</button>
-    ```
+1. 소스 코드 전반에 퍼져있는 상수값(하드 코딩된 문자열 등을 포함)을 하나의 폴더(`src/constants`)에서 관리합니다.
 
-- 추가 button을 클릭하면 입력 input의 내용이 새로운 TODO로 추가되도록 해주세요
+### 5-2. 리팩토링
 
-#### Assignment 7
+| 번호 | 작업명 | Issue | PR |
+|------|-------|-------|----|
+| 1 | API 호출 함수를 페이지 요소로부터 분리 | [#15](https://github.com/seongbin9786/wanted-pre-onboarding-frontend/issues/15) | [#26](https://github.com/seongbin9786/wanted-pre-onboarding-frontend/issues/26) |
+| 2 | Todo List에서 CreateForm 컴포넌트 분리 | [#17](https://github.com/seongbin9786/wanted-pre-onboarding-frontend/issues/17) | [#28](https://github.com/seongbin9786/wanted-pre-onboarding-frontend/issues/28) |
+| 3 | SignIn, SignUp 페이지 간 중복 제거 | [#18](https://github.com/seongbin9786/wanted-pre-onboarding-frontend/issues/18) | [#28](https://github.com/seongbin9786/wanted-pre-onboarding-frontend/issues/28) | 
+| 4 | AccessToken 상태 관리를 분리 | [#19](https://github.com/seongbin9786/wanted-pre-onboarding-frontend/issues/19) | [#29](https://github.com/seongbin9786/wanted-pre-onboarding-frontend/issues/29) |
 
-- TODO의 체크박스를 통해 완료 여부를 수정할 수 있도록 해주세요.
-
-#### Assignment 8
-
-- TODO 우측에 수정버튼과 삭제 버튼을 만들어주세요
-
-  - 수정 버튼에는 `data-testid="modify-button"` 속성을 부여해주세요
-  - 삭제 버튼에는 `data-testid="delete-button"` 속성을 부여해주세요
-
-    ```html
-    <li>
-      <label>
-        <input type="checkbox" />
-        <span>TODO 1</span>
-      </label>
-      <button data-testid="modify-button">수정</button>
-      <button data-testid="delete-button">삭제</button>
-    </li>
-    ```
-
-#### Assignment 9
-
-- 투두 리스트의 삭제 기능을 구현해주세요
-
-  - 투두 리스트의 TODO 우측의 삭제버튼을 누르면 해당 아이템이 삭제되도록 해주세요
-
-#### Assignment 10
-
-- 투두 리스트의 수정 기능을 구현해주세요
-
-  - TODO 우측의 수정 버튼을 누르면 수정모드가 활성화 되도록 해주세요
-  - 수정모드에서는 TODO의 내용을 변경할 수 있어야 합니다.
-  - 수정모드에서는 TODO의 내용이 input창 안에 입력된 형태로 변경해주세요
-    - 수정 input창에는 `data-testid="modify-input"` 속성을 부여해주세요
-  - 수정모드에서는 TODO의 우측에 제출버튼과 취소버튼이 표시되게 해주세요
-    - 제출버튼에는 `data-testid="submit-button"` 속성을 부여해주세요
-    - 취소버튼에는 `data-testid="cancel-button"` 속성을 부여해주세요
-  - 제출버튼을 누르면 수정한 내용을 제출해서 내용이 업데이트 될 수 있도록 해주세요
-  - 취소버튼을 누르면 수정한 내용을 초기화 하고, 수정모드를 비활성화 해주세요
-
-    ```html
-    <input data-testid="modify-input" />
-    <button data-testid="submit-button">제출</button>
-    <button data-testid="cancel-button">취소</button>
-    ```
-
-# API
-
-- API 주소: [https://pre-onboarding-selection-task.shop/](https://pre-onboarding-selection-task.shop/)
-
-## 스펙
-
-## 1) Auth
-
----
-
-## 1-1) SignUp
-
-### 요청
-
-- URL: `/auth/signup`
-- Method: `POST`
-- Headers:
-  - Content-Type: `application/json`
-- Body:
-  - email: string
-  - password: string
-
-### 응답 예시
-
-- status: 201 Created
-- body: 없음
-
-## 1-2) SignIn
-
-### 요청
-
-- URL: `/auth/signin`
-- Method: `POST`
-- Headers:
-  - Content-Type: `application/json`
-- Body:
-  - email: string
-  - password: string
-
-### 응답 예시
-
-- status: 200 OK
-- body
-  ```json
-  {
-    "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAZ21haWwuY29tIiwic3ViIjo0LCJpYXQiOjE2NTk5MDQyMTUsImV4cCI6MTY2MDUwOTAxNX0.DyUCCsIGxIl8i_sGFCa3uQcyEDb9dChjbl40h3JWJNc"
-  }
-  ```
-
-## 2) Todo
-
-## 2-1) createTodo
-
-### 요청
-
-- URL: `/todos`
-- Method: `POST`
-- Headers:
-  - Authorization: `Bearer access_token`
-  - Content-Type: `application/json`
-- Body:
-  - todo: string
-
-### 응답 예시
-
-- status: 201 Created
-- body
-  ```json
-  {
-    "id": 1,
-    "todo": "과제하기",
-    "isCompleted": false,
-    "userId": 1
-  }
-  ```
-
-## 2-2) getTodos
-
-### 요청
-
-- URL: `/todos`
-- Method: `GET`
-- Headers:
-  - Authorization: `Bearer access_token`
-
-### 응답 예시
-
-- status: 200 OK
-- body
-  ```json
-  [
-    {
-      "id": 1,
-      "todo": "todo2",
-      "isCompleted": false,
-      "userId": 1
-    },
-    {
-      "id": 2,
-      "todo": "todo3",
-      "isCompleted": false,
-      "userId": 1
-    }
-  ]
-  ```
-
-## 2-3) updateTodo
-
-### 요청
-
-- URL: `/todos/:id`
-- Method: `PUT`
-- Headers:
-  - Authorization: `Bearer access_token`
-  - Content-Type: `application/json`
-- Body:
-  - todo: string
-  - isCompleted: boolean
-
-### 응답 예시
-
-- status: 200 OK
-- body
-  ```json
-  {
-    "id": 1,
-    "todo": "Hello World",
-    "isCompleted": true,
-    "userId": 2
-  }
-  ```
-
-## 2-4) deleteTodo
-
-### 요청
-
-- URL: `/todos/:id`
-- Method: `DELETE`
-- Headers:
-  - Authorization: `Bearer access_token`
-
-### 응답 예시
-
-- status: 204 No Content
-- body: 없음
