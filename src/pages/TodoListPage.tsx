@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { TodoApi, TodoListItemData } from '../apis/TodoApis';
+import { TodoCreateForm } from '../components/TodoCreateForm';
 import { TodoListItem } from '../components/TodoListItem';
 
 interface TodoListPageProps {
@@ -13,7 +14,12 @@ interface TodoListPageProps {
 export function TodoListPage({ todoApi, loggedIn }: TodoListPageProps) {
   const [loaded, setLoaded] = useState(false);
   const [todos, setTodos] = useState<TodoListItemData[]>([]);
-  const [createInput, setCreateInput] = useState('');
+
+  const handleAddNewTodo = async (name: string) => {
+    const createdTodo = await todoApi.createTodo(name);
+    setTodos([...todos, createdTodo]);
+  };
+
   const handleCheckChange = (id: number) => async () => {
     // 이렇게 처리해도 될까? 모르겠네
     const toChange = todos.find((todo) => todo.id === id);
@@ -24,9 +30,7 @@ export function TodoListPage({ todoApi, loggedIn }: TodoListPageProps) {
     await todoApi.updateTodo(toChange);
     setTodos([...todos]);
   };
-  const addNewTodo = (newItem: TodoListItemData) => {
-    setTodos([...todos, newItem]);
-  };
+
   const handleSubmit = (id: number) => async (name: string) => {
     // 이렇게 처리해도 될까? 모르겠네
     const toChange = todos.find((todo) => todo.id === id);
@@ -37,6 +41,7 @@ export function TodoListPage({ todoApi, loggedIn }: TodoListPageProps) {
     await todoApi.updateTodo(toChange);
     setTodos([...todos]);
   };
+
   const handleDelete = (id: number) => async () => {
     await todoApi.deleteTodo(id);
     setTodos(todos.filter((todo) => todo.id !== id));
@@ -48,7 +53,6 @@ export function TodoListPage({ todoApi, loggedIn }: TodoListPageProps) {
       if (!loggedIn) {
         return;
       }
-
       const todos = await todoApi.fetchTodos();
       setTodos(todos);
       setLoaded(true);
@@ -70,6 +74,7 @@ export function TodoListPage({ todoApi, loggedIn }: TodoListPageProps) {
       </div>
     );
   }
+
   return (
     <div>
       <h1>Your todos:</h1>
@@ -79,36 +84,20 @@ export function TodoListPage({ todoApi, loggedIn }: TodoListPageProps) {
         </div>
       ) : (
         <ol style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-          {todos.map((todo) => (
-            <li key={todo.id}>
+          {todos.map(({ id, todo, isCompleted }) => (
+            <li key={id}>
               <TodoListItem
-                name={todo.todo}
-                checked={todo.isCompleted}
-                handleCheck={handleCheckChange(todo.id)}
-                handleSubmit={handleSubmit(todo.id)}
-                handleDelete={handleDelete(todo.id)}
+                name={todo}
+                checked={isCompleted}
+                handleCheck={handleCheckChange(id)}
+                handleSubmit={handleSubmit(id)}
+                handleDelete={handleDelete(id)}
               />
             </li>
           ))}
         </ol>
       )}
-      {/* 이걸 따로 빼면 뭐가 힘들까? */}
-      <h2>Add new Todo!</h2>
-      <input
-        data-testid="new-todo-input"
-        value={createInput}
-        onChange={(e) => setCreateInput(e.target.value)}
-      />
-      <button
-        data-testid="new-todo-and-button"
-        onClick={async () => {
-          const createdTodo = await todoApi.createTodo(createInput);
-          addNewTodo(createdTodo);
-          setCreateInput('');
-        }}
-      >
-        추가
-      </button>
+      <TodoCreateForm onAddNewTodo={handleAddNewTodo} />
     </div>
   );
 }
