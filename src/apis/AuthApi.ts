@@ -15,18 +15,14 @@ interface SignInApiResponse {
 }
 
 export class AuthApi extends AbstractApi {
-  async signInApi(signInFormData: SigninFormData) {
+  async signInApi(form: SigninFormData) {
     const url = "/auth/signin";
-    const response = await this.request<SignInApiResponse>(
-      "post",
-      url,
-      signInFormData
-    );
+    const response = await this.request<SignInApiResponse>("post", url, form);
     return response.acess_token;
   }
 
-  async signUpApi(signupFormData: SignupFormData) {
+  async signUpApi(form: SignupFormData) {
     const url = "/auth/signup";
-    await this.request("post", url, signupFormData);
+    await this.request("post", url, form);
   }
 }
