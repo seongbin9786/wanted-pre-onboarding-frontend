@@ -18,7 +18,7 @@ export const LoginProvider = ({ children }: React.PropsWithChildren) => {
   const [accessToken, setAccessToken] = useState('');
 
   const login = (newAccessToken: string) => {
-    localStorage.setItem(ACCESS_TOKEN, accessToken);
+    localStorage.setItem(ACCESS_TOKEN, newAccessToken);
     setAccessToken(newAccessToken);
     setLoggedIn(true);
   };
