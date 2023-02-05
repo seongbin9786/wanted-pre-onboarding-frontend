@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { TodoApi, TodoListItemData } from '../../apis/TodoApis';
 import { TodoCreateForm } from '../../components/TodoCreateForm';
 import { TodoListItem } from '../../components/TodoListItem';
+import { TODOLIST_TITLE } from '../../constants/UIMessageConstants';
 import { LoginContext } from '../../contexts/LoginContext';
 import {
   DividerStyle,
@@ -70,7 +71,7 @@ export function TodoListPage() {
 
   return (
     <div style={RootContainerStyle}>
-      <h1>남은 할일 목록!</h1>
+      <h1>{TODOLIST_TITLE}</h1>
       <TodoCreateForm onAddNewTodo={handleAddNewTodo} />
       <hr style={DividerStyle} />
       {todos.length === 0 ? (

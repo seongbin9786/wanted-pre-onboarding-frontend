@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { ADD_BUTTON_TITLE } from '../../constants/UIMessageConstants';
 import { Button } from '../Button';
 import { ContainerStyle, ModifyInputStyle } from './style';
 
@@ -28,7 +29,7 @@ export function TodoCreateForm({ onAddNewTodo: addNewTodo }: CreateFormProps) {
       />
       <Button
         id="new-todo-add-button"
-        name="추가"
+        name={ADD_BUTTON_TITLE}
         handleClick={handleButtonClick}
       />
     </div>

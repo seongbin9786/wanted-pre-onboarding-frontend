@@ -1,13 +1,11 @@
 import { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import {
+  LOGOUT_BUTTON_TITLE,
+  NAVBAR_LINKS,
+} from '../../constants/UIMessageConstants';
 import { LoginContext } from '../../contexts/LoginContext';
 import { ContainerStyle, LinkStyle, LogoutButtonStyle } from './style';
-
-const NAVBAR_LINKS = [
-  ['/signin', '로그인'],
-  ['/signup', '회원가입'],
-  ['/todo', '할일목록'],
-];
 
 export const NavigationBar = () => {
   const navigate = useNavigate();
@@ -22,7 +20,7 @@ export const NavigationBar = () => {
     <div style={ContainerStyle}>
       {loggedIn && (
         <button onClick={handleLogout} style={LogoutButtonStyle}>
-          로그아웃
+          {LOGOUT_BUTTON_TITLE}
         </button>
       )}
       {NAVBAR_LINKS.map(([link, name]) => (
