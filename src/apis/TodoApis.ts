@@ -18,7 +18,7 @@ export class TodoApi extends AbstractApi {
     const body = {
       todo: name,
     };
-    return this.request<TodoListItemData>('get', url, body);
+    return this.request<TodoListItemData>('post', url, body);
   }
 
   async updateTodo({ id, todo, isCompleted }: TodoListItemData) {

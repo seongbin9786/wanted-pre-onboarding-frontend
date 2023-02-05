@@ -22,7 +22,15 @@ export class AbstractApi {
     const response = await fetch(url, requestConfig);
 
     await this.assertResponseIsOk(response);
-    return response.json() as T;
+
+    // bugfix: response body가 없는 경우 오류 발생함
+    try {
+      const text = await response.text();
+      return JSON.parse(text) as T;
+    } catch (err) {
+      // TODO: T 제거
+      return null as T;
+    }
   }
 
   private createFetchConfig(requestMethod: string, inputData: object | null) {
