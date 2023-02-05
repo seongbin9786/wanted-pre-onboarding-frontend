@@ -2,6 +2,7 @@ import { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthApi } from '../apis/AuthApi';
 import { LoginForm } from '../components/LoginForm';
+import { LOGIN_PAGE_TITLE } from '../constants/UIMessageConstants';
 import { LoginContext } from '../contexts/LoginContext';
 
 const API_SERVER_URL = 'https://pre-onboarding-selection-task.shop';
@@ -34,7 +35,7 @@ export function SignInPage() {
 
   return (
     <div>
-      <h1>로그인 폼</h1>
+      <h1>{LOGIN_PAGE_TITLE}</h1>
       <LoginForm mode="signin" handleSubmit={handleLogin} />
     </div>
   );

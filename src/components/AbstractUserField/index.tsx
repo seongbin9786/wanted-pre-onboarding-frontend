@@ -8,6 +8,9 @@ interface UserAbstractFieldProps {
   handleChange: (newValue: string) => void;
 }
 
+/**
+ * 사용자 입력 필드의 코드 재사용을 위한 컴포넌트
+ */
 export function UserAbstractField({
   id,
   name,

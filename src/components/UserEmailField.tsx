@@ -1,3 +1,4 @@
+import { ID_INPUT_TITLE } from '../constants/UIMessageConstants';
 import { UserAbstractField } from './AbstractUserField';
 
 interface UserEmailFieldProps {
@@ -14,7 +15,7 @@ export function UserEmailField({
   return (
     <UserAbstractField
       id={id}
-      name="아이디"
+      name={ID_INPUT_TITLE}
       value={value}
       type="text"
       handleChange={handleChange}

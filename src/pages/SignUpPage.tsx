@@ -2,6 +2,7 @@ import { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthApi } from '../apis/AuthApi';
 import { LoginForm } from '../components/LoginForm';
+import { SIGNUP_PAGE_TITLE } from '../constants/UIMessageConstants';
 import { LoginContext } from '../contexts/LoginContext';
 
 const API_SERVER_URL = 'https://pre-onboarding-selection-task.shop';
@@ -33,7 +34,7 @@ export function SignUpPage() {
 
   return (
     <div>
-      <h1>회원가입 폼</h1>
+      <h1>{SIGNUP_PAGE_TITLE}</h1>
       <LoginForm mode="signup" handleSubmit={handleSignup} />
     </div>
   );

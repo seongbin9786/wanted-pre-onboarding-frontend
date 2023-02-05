@@ -1,3 +1,4 @@
+import { PASSWORD_INPUT_TITLE } from '../constants/UIMessageConstants';
 import { UserAbstractField } from './AbstractUserField';
 
 interface UserPasswordFieldProps {
@@ -14,7 +15,7 @@ export function UserPasswordField({
   return (
     <UserAbstractField
       id={id}
-      name="비밀번호"
+      name={PASSWORD_INPUT_TITLE}
       value={value}
       type="password"
       handleChange={handleChange}

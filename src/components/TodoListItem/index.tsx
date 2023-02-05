@@ -1,4 +1,10 @@
 import { useState } from 'react';
+import {
+  CANCEL_BUTTON_TITLE,
+  MODIFY_BUTTON_TITLE,
+  REMOVE_BUTTON_TITLE,
+  SUBMIT_BUTTON_TITLE,
+} from '../../constants/UIMessageConstants';
 import { Button } from '../Button';
 import {
   CheckboxStyle,
@@ -31,7 +37,7 @@ export function TodoListItem({
   };
 
   return (
-    <div style={ContainerStyle}>
+    <li style={ContainerStyle}>
       <label style={LabelStyle}>
         <input
           style={CheckboxStyle}
@@ -54,10 +60,14 @@ export function TodoListItem({
 
       {modifyMode ? (
         <>
-          <Button id="submit-button" name="제출" handleClick={commitModified} />
+          <Button
+            id="submit-button"
+            name={SUBMIT_BUTTON_TITLE}
+            handleClick={commitModified}
+          />
           <Button
             id="cancel-button"
-            name="취소"
+            name={CANCEL_BUTTON_TITLE}
             handleClick={() => setModifyMode(false)}
           />
         </>
@@ -65,12 +75,16 @@ export function TodoListItem({
         <>
           <Button
             id="modify-button"
-            name="수정"
+            name={MODIFY_BUTTON_TITLE}
             handleClick={() => setModifyMode(true)}
           />
-          <Button id="delete-button" name="삭제" handleClick={handleDelete} />
+          <Button
+            id="delete-button"
+            name={REMOVE_BUTTON_TITLE}
+            handleClick={handleDelete}
+          />
         </>
       )}
-    </div>
+    </li>
   );
 }

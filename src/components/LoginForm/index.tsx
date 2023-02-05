@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { LOGIN_BUTTON_TITLE } from '../../constants/UIMessageConstants';
 import { UserEmailField } from '../UserEmailField';
 import { UserPasswordField } from '../UserPasswordField';
 import { LoginButtonStyle, LoginFormStyle } from './style';
@@ -30,12 +31,12 @@ export function LoginForm({ mode, handleSubmit }: LoginFormProps) {
   return (
     <div style={LoginFormStyle}>
       <UserEmailField
-        id={`${mode}-email-input`}
+        id="email-input"
         value={email}
         handleChange={updateEmail}
       />
       <UserPasswordField
-        id={`${mode}-password-input`}
+        id="password-input"
         value={password}
         handleChange={updatePassword}
       />
@@ -46,7 +47,7 @@ export function LoginForm({ mode, handleSubmit }: LoginFormProps) {
         disabled={!submitAvailable}
         onClick={handleButtonClick}
       >
-        로그인
+        {LOGIN_BUTTON_TITLE}
       </button>
     </div>
   );
