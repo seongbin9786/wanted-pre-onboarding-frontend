@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import {
   CANCEL_BUTTON_TITLE,
   MODIFY_BUTTON_TITLE,
@@ -15,14 +15,16 @@ import {
 } from './style';
 
 interface TodoListItemProps {
+  id: number;
   name: string;
   checked: boolean;
-  handleCheck: () => void;
-  handleSubmit: (name: string) => void;
-  handleDelete: () => void;
+  handleCheck: (id: number) => () => void;
+  handleSubmit: (id: number) => (name: string) => void;
+  handleDelete: (id: number) => () => void;
 }
 
-export function TodoListItem({
+function UnPureTodoListItem({
+  id,
   name,
   checked,
   handleCheck,
@@ -32,7 +34,7 @@ export function TodoListItem({
   const [modifyMode, setModifyMode] = useState(false);
   const [input, setInput] = useState(name);
   const commitModified = async () => {
-    await handleSubmit(input);
+    await handleSubmit(id)(input);
     setModifyMode(false);
   };
 
@@ -44,7 +46,7 @@ export function TodoListItem({
           type="checkbox"
           name="checked"
           defaultChecked={checked}
-          onChange={handleCheck}
+          onChange={handleCheck(id)}
         />
         {modifyMode ? (
           <input
@@ -81,10 +83,29 @@ export function TodoListItem({
           <Button
             id="delete-button"
             name={REMOVE_BUTTON_TITLE}
-            handleClick={handleDelete}
+            handleClick={handleDelete(id)}
           />
         </>
       )}
     </li>
   );
 }
+
+export const TodoListItem = React.memo(
+  UnPureTodoListItem,
+  (prevProps, nextProps) => {
+    // console.log(`prevProps`, prevProps);
+    // console.log(`nextProps`, prevProps);
+    console.log(`handleCheck`, prevProps.handleCheck === nextProps.handleCheck);
+    console.log(
+      `handleDelete`,
+      prevProps.handleDelete === nextProps.handleDelete
+    );
+    console.log(
+      `handleSubmit`,
+      prevProps.handleSubmit === nextProps.handleSubmit
+    );
+
+    return prevProps !== nextProps;
+  }
+);
