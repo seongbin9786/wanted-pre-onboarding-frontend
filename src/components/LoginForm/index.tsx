@@ -1,5 +1,8 @@
 import { useState } from 'react';
-import { LOGIN_BUTTON_TITLE } from '../../constants/UIMessageConstants';
+import {
+  LOGIN_BUTTON_TITLE,
+  SIGNUP_BUTTON_TITLE,
+} from '../../constants/UIMessageConstants';
 import { UserEmailField } from '../UserEmailField';
 import { UserPasswordField } from '../UserPasswordField';
 import { LoginButtonStyle, LoginFormStyle } from './style';
@@ -15,6 +18,8 @@ export function LoginForm({ mode, handleSubmit }: LoginFormProps) {
   const [password, setPassword] = useState('');
   const [passwordlIsValid, setPasswordlIsvalid] = useState(false);
   const submitAvailable = emailIsValid && passwordlIsValid;
+  const buttonTitle =
+    mode === 'signin' ? LOGIN_BUTTON_TITLE : SIGNUP_BUTTON_TITLE;
 
   const updateEmail = (newEmail: string) => {
     setEmailIsvalid(newEmail.includes('@'));
@@ -47,7 +52,7 @@ export function LoginForm({ mode, handleSubmit }: LoginFormProps) {
         disabled={!submitAvailable}
         onClick={handleButtonClick}
       >
-        {LOGIN_BUTTON_TITLE}
+        {buttonTitle}
       </button>
     </div>
   );

@@ -1,4 +1,5 @@
 export const LOGIN_BUTTON_TITLE = '로그인';
+export const SIGNUP_BUTTON_TITLE = '회원가입';
 export const LOGOUT_BUTTON_TITLE = '로그아웃';
 
 export const ID_INPUT_TITLE = '아이디';
