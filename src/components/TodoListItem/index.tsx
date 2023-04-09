@@ -18,8 +18,8 @@ interface TodoListItemProps {
   id: number;
   name: string;
   checked: boolean;
-  handleCheck: (id: number) => () => void;
-  handleSubmit: (id: number) => (name: string) => void;
+  handleFinishToggle: (id: number) => () => void;
+  handleTitleChange: (id: number, name: string) => Promise<void>;
   handleDelete: (id: number) => () => void;
 }
 
@@ -27,14 +27,14 @@ function UnPureTodoListItem({
   id,
   name,
   checked,
-  handleCheck,
-  handleSubmit,
+  handleFinishToggle,
+  handleTitleChange,
   handleDelete,
 }: TodoListItemProps) {
   const [modifyMode, setModifyMode] = useState(false);
   const [input, setInput] = useState(name);
   const commitModified = async () => {
-    await handleSubmit(id)(input);
+    await handleTitleChange(id, input);
     setModifyMode(false);
   };
 
@@ -46,7 +46,7 @@ function UnPureTodoListItem({
           type="checkbox"
           name="checked"
           defaultChecked={checked}
-          onChange={handleCheck(id)}
+          onChange={handleFinishToggle(id)}
         />
         {modifyMode ? (
           <input
@@ -91,21 +91,4 @@ function UnPureTodoListItem({
   );
 }
 
-export const TodoListItem = React.memo(
-  UnPureTodoListItem,
-  (prevProps, nextProps) => {
-    // console.log(`prevProps`, prevProps);
-    // console.log(`nextProps`, prevProps);
-    console.log(`handleCheck`, prevProps.handleCheck === nextProps.handleCheck);
-    console.log(
-      `handleDelete`,
-      prevProps.handleDelete === nextProps.handleDelete
-    );
-    console.log(
-      `handleSubmit`,
-      prevProps.handleSubmit === nextProps.handleSubmit
-    );
-
-    return prevProps !== nextProps;
-  }
-);
+export const TodoListItem = React.memo(UnPureTodoListItem);

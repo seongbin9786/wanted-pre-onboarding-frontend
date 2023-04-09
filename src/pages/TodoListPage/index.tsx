@@ -34,39 +34,30 @@ export function TodoListPage() {
     [todoApi]
   );
 
-  const handleCheckChange = useCallback(
-    (id: number) => async () => {
-      const toChange = todos.find((todo) => todo.id === id);
-      if (!toChange) {
-        return;
-      }
-      toChange.isCompleted = !toChange.isCompleted;
-      await todoApi.updateTodo(toChange);
-      setTodos([...todos]);
-    },
-    [todoApi]
-  );
+  const handleFinishToggle = (id: number) => async () => {
+    const toChange = todos.find((todo) => todo.id === id);
+    if (!toChange) {
+      return;
+    }
+    toChange.isCompleted = !toChange.isCompleted;
+    await todoApi.updateTodo(toChange);
+    setTodos([...todos]);
+  };
 
-  const handleSubmit = useCallback(
-    (id: number) => async (name: string) => {
-      const toChange = todos.find((todo) => todo.id === id);
-      if (!toChange) {
-        return;
-      }
-      toChange.todo = name;
-      await todoApi.updateTodo(toChange);
-      setTodos((todos) => [...todos]);
-    },
-    [todoApi]
-  );
+  const handleTitleChange = async (id: number, name: string) => {
+    const toChange = todos.find((todo) => todo.id === id);
+    if (!toChange) {
+      return;
+    }
+    toChange.todo = name;
+    await todoApi.updateTodo(toChange);
+    setTodos((todos) => [...todos]);
+  };
 
-  const handleDelete = useCallback(
-    (id: number) => async () => {
-      await todoApi.deleteTodo(id);
-      setTodos((todos) => todos.filter((todo) => todo.id !== id));
-    },
-    [todoApi]
-  );
+  const handleDelete = (id: number) => async () => {
+    await todoApi.deleteTodo(id);
+    setTodos((todos) => todos.filter((todo) => todo.id !== id));
+  };
 
   // 최초 로딩
   useEffect(() => {
@@ -101,8 +92,8 @@ export function TodoListPage() {
                   id={id}
                   name={todo}
                   checked={isCompleted}
-                  handleCheck={handleCheckChange}
-                  handleSubmit={handleSubmit}
+                  handleFinishToggle={handleFinishToggle}
+                  handleTitleChange={handleTitleChange}
                   handleDelete={handleDelete}
                 />
               </li>
