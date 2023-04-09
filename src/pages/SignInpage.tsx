@@ -5,7 +5,7 @@ import { LoginForm } from '../components/LoginForm';
 import { LOGIN_PAGE_TITLE } from '../constants/UIMessageConstants';
 import { LoginContext } from '../contexts/LoginContext';
 
-const API_SERVER_URL = 'https://pre-onboarding-selection-task.shop';
+const API_SERVER_URL = 'https://www.pre-onboarding-selection-task.shop';
 const authApi = new AuthApi(API_SERVER_URL);
 
 export function SignInPage() {

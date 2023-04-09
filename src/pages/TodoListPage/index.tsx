@@ -14,7 +14,7 @@ import {
   RootContainerStyle,
 } from './style';
 
-const API_SERVER_URL = 'https://pre-onboarding-selection-task.shop';
+const API_SERVER_URL = 'https://www.pre-onboarding-selection-task.shop';
 
 export function TodoListPage() {
   const navigate = useNavigate();
